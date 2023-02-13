@@ -38,8 +38,10 @@ namespace :dependency do
                                     Parquet::Version::MAJOR,
                                     Parquet::Version::MINOR,
                                     Parquet::Version::MICRO)
-      unless NativePackageInstaller.install(debian: "libparquet-glib-dev",
-                                            redhat: "parquet-glib-devel")
+      pkg_version = "#{Parquet::Version::MAJOR}.#{Parquet::Version::MINOR}"\
+                    ".#{Parquet::Version::MICRO}"
+      unless NativePackageInstaller.install(debian: "libparquet-glib-dev:#{pkg_version}",
+                                            redhat: "parquet-glib-devel:#{pkg_version}")
         exit(false)
       end
     end
